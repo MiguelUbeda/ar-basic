@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body style="margin : 0px; overflow: hidden;">
+   <a-scene cursor="rayOrigin: mouse; fuse: true" renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true;">
+    <a-gltf-model src="./logo/Mobility_Reto_00.gltf" id="box" position="0 0 0.34" ></a-gltf-model>
+      <a-marker-camera preset="hiro" ></a-marker-camera>
+   </a-scene>
+   <script>
+    let box = document.querySelector("#box");
+    box.addEventListener("click", function(evt){
+      console.log("CAJA");
+    })
+   </script>
+</body>
+</html>
