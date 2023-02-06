@@ -5,37 +5,35 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   </head>
   <body style="margin : 0px; overflow: hidden;">
-   <a-scene embedded arjs cursor="rayOrigin: mouse; fuse: true" renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true;">
-    <!-- <a-entity position="0.1 0.4 -5" rotation="0 205 0" gltf-model="./medica/reto_01_inicio_vineta01_cientifico.gltf" animation-mixer></a-entity> -->
-    <a-box id="caja" position='0 0.5 0' material='opacity: 0.5;'></a-box>
-    <a-marker-camera preset='hiro'></a-marker-camera>
+   <a-scene id="scene1" embedded arjs cursor="rayOrigin: mouse; fuse: true" renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true;">
+   
+  <a-box id="caja2" position='0 0.5 -5' material='opacity: 0.5;'></a-box>
+<a-marker preset='hiro' id="marker1">  
+  <a-entity gltf-model="./medica/Mobility_Reto01_00_.gltf" id="caja1" position='0.6 0.3 -4' scale="0.6 0.6 0.6"></a-box>
+</a-marker>
    </a-scene>
    <button id="hola" style = "position: absolute; left: 20vw; top: 5vh;">HOLA</button>
    <script>
+    let marker = document.querySelector("#marker1");
     let hola = document.querySelector("#hola");
-    let caja = document.querySelector("#caja");
+    let caja = document.querySelector("#caja1");
+    let initialPosition = caja.getAttribute("position");
     caja.addEventListener("click", function(evt){
       console.log("CAJAAAA");
+      this.setAttribute("visible", false);
     })
     hola.addEventListener("click", function(evt){
       console.log("HOLAAAA");
+      console.log(marker);
+      
       let scene = document.querySelector("a-scene");
-      if (scene) {
-    scene.parentNode.removeChild(scene);
-  } else {
-    scene = document.createElement("a-scene");
-    scene.setAttribute("cursor", "rayOrigin: mouse; fuse: true");
-    scene.setAttribute("renderer", "logarithmicDepthBuffer: true; antialias: true; colorManagement: true;");
-    let entity = document.createElement("a-entity");
-    entity.setAttribute("position", "0.1 0.4 -5");
-    entity.setAttribute("rotation", "0 205 0");
-    entity.setAttribute("gltf-model", "./medica/reto_01_inicio_vineta01_cientifico.gltf");
-    entity.setAttribute("animation-mixer", "");
-    scene.appendChild(entity);
+});
+marker.addEventListener("markerLost", function(evt) {
+  console.log("HOLA MARKER");
+  // Restore the initial position of the model.
+  caja.setAttribute("position", initialPosition);
+});
 
-    document.body.appendChild(scene);
-  }
-    })
    </script>
 </body>
 </html>
